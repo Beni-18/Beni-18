@@ -20,30 +20,26 @@ from pathlib import Path
 import content as c
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSETS = Path(os.environ["OUT"]) if os.environ.get("OUT") else ROOT / "assets"
+ASSETS = ROOT / "assets"
 
-# Palettes. Every colour in every image comes from the active one (content.THEME, or $THEME).
+# One trio, drawn on GitHub's own page colours (Primer primitives 11.10) so every image blends into
+# the profile: canvas + blue (#4493f8 / #0969da) + orange (#db6d28 / #bc4c00). Blue and orange are
+# near-complementary (169 degrees apart), both pass WCAG AA on the panel colour, and stay the most
+# distinct of GitHub's accent pairs under simulated colour-blindness. README.md serves the dark set to
+# dark-mode visitors and the light set to light-mode visitors with <picture>.
 # Roles: BG page, PANEL boxes, LINE hairlines, TEXT/MUTED/DIM type, GHOST hidden details,
-# BLUE structure, AMBER numbers and highlights, FAM model-zoo families.
+# BLUE structure, AMBER (now orange) numbers and highlights, FAM model-zoo families.
 THEMES = {
-    "matte": dict(BG="#0A0C0F", PANEL="#0F1217", LINE="#1C222B", GRID="#12171E", TEXT="#E8EDF4", MUTED="#8B95A4",
-                  DIM="#4A5361", GHOST="#222A35", GHOST2="#1A2230", BLUE="#2F6BFF", BLUE2="#5C8DFF", ICE="#A8C6FF",
-                  DEEP="#14306E", MIDBLUE="#1E4FC4", AMBER="#FFB224", SAND="#FFD98A", STEEL="#A9B4C4",
-                  FAM={"REG": "#7FA8FF", "CLF": "#2F6BFF", "ENS": "#FFB224", "CLU": "#FFD98A", "SEL": "#A9B4C4"}),
-    "midnight": dict(BG="#0A1A33", PANEL="#0F2342", LINE="#22385E", GRID="#11223F", TEXT="#EEF3FB", MUTED="#9AAED0",
-                     DIM="#5A6F94", GHOST="#1E3256", GHOST2="#193052", BLUE="#4D8DFF", BLUE2="#7EAAFF", ICE="#C3D7FF",
-                     DEEP="#2C4F8C", MIDBLUE="#3A6FE0", AMBER="#FFB547", SAND="#FFDB94", STEEL="#B5C2D8",
-                     FAM={"REG": "#8DB3FF", "CLF": "#4D8DFF", "ENS": "#FFB547", "CLU": "#FFDB94", "SEL": "#B5C2D8"}),
-    "slate": dict(BG="#1B2330", PANEL="#222C3B", LINE="#313D50", GRID="#222B39", TEXT="#EEF2F7", MUTED="#A0ACBD",
-                  DIM="#66738A", GHOST="#2C3748", GHOST2="#283344", BLUE="#5B8CFF", BLUE2="#84A9FF", ICE="#C6D7FF",
-                  DEEP="#2F4A7D", MIDBLUE="#4672E0", AMBER="#FFB84D", SAND="#FFDA94", STEEL="#B3BECD",
-                  FAM={"REG": "#96B6FF", "CLF": "#5B8CFF", "ENS": "#FFB84D", "CLU": "#FFDA94", "SEL": "#B3BECD"}),
-    "paper": dict(BG="#F4F1EA", PANEL="#FFFFFF", LINE="#E1DCD0", GRID="#ECE7DC", TEXT="#141821", MUTED="#5D6573",
-                  DIM="#9AA1AD", GHOST="#E6E0D3", GHOST2="#DDD6C7", BLUE="#1E56E8", BLUE2="#3B6FF0", ICE="#4B74D9",
-                  DEEP="#BFD0F7", MIDBLUE="#3D6AE6", AMBER="#D98A00", SAND="#E8B95A", STEEL="#8E97A6",
-                  FAM={"REG": "#5A86F2", "CLF": "#1E46C8", "ENS": "#D98A00", "CLU": "#B7791F", "SEL": "#6B7383"}),
+    "dark": dict(BG="#0d1117", PANEL="#151b23", LINE="#3d444d", GRID="#151b23", TEXT="#f0f6fc", MUTED="#9198a1",
+                 DIM="#656c76", GHOST="#1c232c", GHOST2="#212830", BLUE="#4493f8", BLUE2="#6cb6ff", ICE="#a5d6ff",
+                 DEEP="#1f3a5f", MIDBLUE="#316dca", AMBER="#db6d28", SAND="#ffa657", STEEL="#9198a1",
+                 FAM={"REG": "#6cb6ff", "CLF": "#4493f8", "ENS": "#db6d28", "CLU": "#ffa657", "SEL": "#9198a1"}),
+    "light": dict(BG="#ffffff", PANEL="#f6f8fa", LINE="#d1d9e0", GRID="#f6f8fa", TEXT="#1f2328", MUTED="#59636e",
+                  DIM="#818b98", GHOST="#eff2f5", GHOST2="#e6eaef", BLUE="#0969da", BLUE2="#0550ae", ICE="#0969da",
+                  DEEP="#b6e3ff", MIDBLUE="#54aeff", AMBER="#bc4c00", SAND="#fb8f44", STEEL="#818b98",
+                  FAM={"REG": "#0969da", "CLF": "#0a3069", "ENS": "#bc4c00", "CLU": "#953800", "SEL": "#59636e"}),
 }
-THEME = os.environ.get("THEME") or getattr(c, "THEME", "matte")
+THEME = "dark"
 globals().update(THEMES[THEME])
 MONO = "ui-monospace,'SF Mono',Menlo,'DejaVu Sans Mono','Courier New',monospace"
 SANS = "'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif"
@@ -546,7 +542,9 @@ CAT = r"""<!--
 
 def readme():
     gh = f"https://github.com/{c.USER}"
-    img = lambda f, alt, w="100%": f'<img src="assets/{f}" alt="{escape(alt)}" width="{w}">'
+    img = lambda f, alt, w="100%": (f'<picture><source media="(prefers-color-scheme: dark)" srcset="assets/dark/{f}">'
+                                    f'<source media="(prefers-color-scheme: light)" srcset="assets/light/{f}">'
+                                    f'<img src="assets/dark/{f}" alt="{escape(alt)}" width="{w}"></picture>')
     pair = lambda items: '<p align="center">' + " ".join(items) + "</p>"  # one paragraph: equal gaps both ways
     out = [CAT, "", '<p align="center">', img("hero.svg", "BENI-18: Bennish Christopher, ML and AI engineer"), "</p>", ""]
     out += [f'<p align="center"><sub><a href="mailto:{c.EMAIL}">email</a> &nbsp;·&nbsp; '
@@ -580,11 +578,7 @@ def readme():
 
 # ------------------------------------------------------------------ main
 
-def main():
-    st = stats()
-    ASSETS.mkdir(parents=True, exist_ok=True)
-    for old in ASSETS.glob("*.svg"):
-        old.unlink()
+def render(st):
     files = {
         "hero.svg": hero(st),
         "h-whoami.svg": header("01", "whoami/", "// the person behind the commits", "dev.whoami()"),
@@ -608,11 +602,22 @@ def main():
         files[f"more-{i + 1:02d}.svg"] = row_card(*m, i)
     for i, s in enumerate(c.SQUADS):
         files[f"squad-{i + 1:02d}.svg"] = row_card(*s, i)
-    for name, body in files.items():
-        (ASSETS / name).write_text(body, encoding="utf-8")
-    if not os.environ.get("OUT"):
-        (ROOT / "README.md").write_text(readme(), encoding="utf-8")
-    print(f"[{THEME}] wrote {len(files)} svgs to {ASSETS} · {st['public']} repos · {len(st['langs'])} languages")
+    return files
+
+
+def main():
+    st = stats()
+    for old in ASSETS.rglob("*.svg"):
+        old.unlink()
+    for mode in THEMES:
+        globals().update(THEMES[mode])
+        out = ASSETS / mode
+        out.mkdir(parents=True, exist_ok=True)
+        files = render(st)
+        for name, body in files.items():
+            (out / name).write_text(body, encoding="utf-8")
+    (ROOT / "README.md").write_text(readme(), encoding="utf-8")
+    print(f"wrote {len(files)} svgs x {len(THEMES)} modes + README.md · {st['public']} repos · {len(st['langs'])} languages")
 
 
 if __name__ == "__main__":
