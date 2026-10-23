@@ -1,13 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="170" height="190" viewBox="0 0 170 190" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="172" height="176" viewBox="0 0 172 176" role="img">
 <desc>7. Gradient Boosting on diabetes (diabetes-gradient-boosting-streamlit)</desc>
 <style>
-text{font-family:ui-monospace,'SF Mono',Menlo,'DejaVu Sans Mono','Courier New',monospace} .s{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif}
-@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-.cur{animation:blink 1.06s steps(1) infinite}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.fade{opacity:0;animation:fade .5s ease-out forwards}
-.rise{opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif} .m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+@keyframes in{from{opacity:0}to{opacity:1}}
+.in{opacity:0;animation:in .6s ease-out forwards}
 </style>
-<rect width="170" height="190" fill="#ffffff"/><rect x=".5" y=".5" width="169" height="189" fill="#f6f8fa" stroke="#d1d9e0"/><rect x="0" y="0" width="170" height="4" fill="#bc4c00"/><text x="14.0" y="30.0" font-size="14" fill="#bc4c00" text-anchor="start" font-weight="700" xml:space="preserve">07</text><text x="156.0" y="30.0" font-size="12" fill="#818b98" text-anchor="end" font-weight="400" xml:space="preserve">ENS</text><g class="rise" style="animation-delay:0.21s"><text x="14.0" y="90.0" font-size="50" fill="#1f2328" text-anchor="start" font-weight="700" class="s" xml:space="preserve">Di</text></g><text x="14.0" y="122.0" font-size="15" fill="#bc4c00" text-anchor="start" font-weight="700" xml:space="preserve">Gradient</text><text x="14.0" y="140.0" font-size="15" fill="#bc4c00" text-anchor="start" font-weight="700" xml:space="preserve">Boosting</text><text x="14.0" y="162.0" font-size="13.5" fill="#59636e" text-anchor="start" font-weight="400" xml:space="preserve">diabetes</text>
+<rect width="172" height="176" fill="#ffffff"/><rect x="3.5" y="3.5" width="165" height="169" rx="6" fill="#f6f8fa" stroke="#d1d9e0"/><text x="17.0" y="30.0" font-size="11" fill="#818b98" text-anchor="start" font-weight="400" class="m" xml:space="preserve">07</text><text x="155.0" y="30.0" font-size="11" fill="#59636e" text-anchor="end" font-weight="400" class="m" xml:space="preserve">ensemble</text><g class="in" style="animation-delay:0.14s"><text x="17.0" y="76.0" font-size="34" fill="#961edc" text-anchor="start" font-weight="600" xml:space="preserve">Di</text></g><text x="17.0" y="106.0" font-size="13.5" fill="#1f2328" text-anchor="start" font-weight="600" xml:space="preserve">Gradient Boosting</text><text x="17.0" y="127.0" font-size="12.5" fill="#59636e" text-anchor="start" font-weight="400" xml:space="preserve">diabetes</text>
 </svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="66" viewBox="0 0 1200 66" role="img">
+<desc>03 Model zoo</desc>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif} .m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+@keyframes in{from{opacity:0}to{opacity:1}}
+.in{opacity:0;animation:in .6s ease-out forwards}
+</style>
+<rect width="1200" height="66" fill="#ffffff"/><text x="3.0" y="38.0" font-size="13" fill="#961edc" text-anchor="start" font-weight="600" class="m" xml:space="preserve">03</text><text x="37.0" y="40.0" font-size="22" fill="#1f2328" text-anchor="start" font-weight="600" xml:space="preserve">Model zoo</text><text x="1197.0" y="38.0" font-size="13" fill="#59636e" text-anchor="end" font-weight="400" class="m" xml:space="preserve">21 models, each deployed as a Streamlit app</text><line x1="3" y1="56.5" x2="1197" y2="56.5" stroke="#d1d9e0"/>
+</svg>

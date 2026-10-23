@@ -11,55 +11,50 @@ EMAIL = "beni18christopher@gmail.com"
 LINKEDIN = "linkedin.com/in/bennish-christopher-89a51733b"
 
 MODEL_CARD = [
-    ("name", "Bennish Christopher"),
-    ("studying", "B.E. CSE (AI & ML), class of 2028"),
-    ("college", "Rathinam Technical Campus"),
-    ("focus", "llm agents · rag · fine-tuning"),
-    ("also", "classical ml · full-stack apps"),
-    ("serving", "fastapi · docker · github actions"),
-    ("speaks", "english · tamil · hindi"),
-    ("location", "coimbatore, india"),
+    ("Studying", "B.E. Computer Science (AI & ML), 2024-2028"),
+    ("College", "Rathinam Technical Campus, Coimbatore"),
+    ("Focus", "LLM agents, RAG and fine-tuning"),
+    ("Also", "Classical ML and full-stack apps"),
+    ("Ships with", "FastAPI, Docker, GitHub Actions"),
+    ("Speaks", "English, Tamil, Hindi"),
 ]
-STATUS = "open to ML & AI engineering roles"
+STATUS = "Open to ML and AI engineering roles"
+SUMMARY = "Building LLM agents, retrieval systems and machine learning models, shipped as tested services."
 
 # Epochs of the account, by repo creation date. "start" is inclusive (YYYY-MM).
 EPOCHS = [
-    ("00", "hello-world", "2024-08", ["first hackathon squads", "first portfolio site"]),
-    ("01", "first-users", "2025-09", ["study-material portal", "Zoho bots · ADK agents"]),
-    ("02", "model-zoo", "2026-01", ["21 ML apps in 4 weeks", "first client (Rails)"]),
-    ("03", "full-stack", "2026-03", ["FixIt · ARtifact", "3 national hackathons"]),
-    ("04", "agents", "2026-07", ["DockMind · Passioné", "ED Monitor · ORCA · Mitra"]),
+    ("00", "Getting started", "2024-08", ["First hackathon teams"]),
+    ("01", "First users", "2025-09", ["Portals, bots, ADK agents"]),
+    ("02", "Model zoo", "2026-01", ["21 ML apps in four weeks"]),
+    ("03", "Full stack", "2026-03", ["FixIt, ARtifact, hackathons"]),
+    ("04", "Agents", "2026-07", ["DockMind, Passioné, ED Monitor"]),
 ]
 
 # Flagship cards. repo = where the card links.
 FLAGSHIP = [
     {
-        "slug": "passport_mitra.agent", "repo": "google-gdg-devfest-2026", "title": "Passport Mitra",
-        "tag": "team of 4 · GDG DevFest 2026",
+        "repo": "google-gdg-devfest-2026", "title": "Passport Mitra", "tag": "Team of 4 · GDG DevFest 2026",
         "desc": "Answers Indian passport and visa questions in your own language, citing the official rule it used.",
-        "metrics": [("5", "languages"), ("96%", "right source, top 5"), ("131", "automated tests")],
-        "stack": "langgraph · rag (chromadb) · qlora · fastapi · react",
+        "metrics": [("5", "languages"), ("96%", "right source in top 5"), ("131", "automated tests")],
+        "stack": "LangGraph · RAG (ChromaDB) · QLoRA · FastAPI · React",
     },
     {
-        "slug": "ed_monitor.alert", "repo": "ED_Monitor", "title": "ED Deterioration Monitor",
-        "tag": "solo", "deco": "ecg",
+        "repo": "ED_Monitor", "title": "ED Deterioration Monitor", "tag": "Solo",
         "desc": "Warns emergency doctors when a patient starts getting worse, combining vital trends with clinical guidelines.",
-        "metrics": [("5", "langgraph nodes"), ("1.4 s", "per recommendation"), ("10", "api endpoints")],
-        "stack": "langgraph · groq · chromadb · fastapi · next.js · docker",
+        "metrics": [("5", "agent steps"), ("1.4 s", "per recommendation"), ("10", "API endpoints")],
+        "stack": "LangGraph · Groq · ChromaDB · FastAPI · Next.js · Docker",
     },
     {
-        "slug": "dockmind.chat", "repo": "DockAssit", "title": "DockMind",
-        "tag": "solo", "deco": "paw",
-        "desc": "Manage Docker containers by typing plain English. A local Llama 3 model does the work; nothing leaves your machine.",
-        "metrics": [("7", "safe actions only"), ("0", "cloud calls"), ("JWT", "login + rate limits")],
-        "stack": "fastapi · react · ollama · docker sdk · postgresql",
+        "repo": "DockAssit", "title": "DockMind", "tag": "Solo", "deco": "paw",
+        "desc": "Manage Docker containers by typing plain English. A local Llama 3 model does the work, so nothing leaves your machine.",
+        "metrics": [("7", "allowed actions"), ("0", "cloud calls"), ("JWT", "auth and rate limits")],
+        "stack": "FastAPI · React · Ollama · Docker SDK · PostgreSQL",
     },
     {
-        "slug": "passione.predict", "repo": "Passione", "title": "Passioné",
-        "tag": "solo",
+        "repo": "Passione", "title": "Passioné", "tag": "Solo",
         "desc": "Predicts a film or short video's popularity from upload-time details, and says \"uncertain\" instead of guessing.",
-        "metrics": [("31.8k", "films trained on"), ("0.86", "roc-auc, new films"), ("19.7k", "short videos")],
-        "stack": "scikit-learn · clip · videomae · fastapi · docker",
+        "metrics": [("31.8k", "films trained on"), ("0.86", "ROC-AUC, new films"), ("19.7k", "short videos")],
+        "stack": "scikit-learn · CLIP · VideoMAE · FastAPI · Docker",
     },
 ]
 
@@ -89,38 +84,38 @@ ZOO = [
     ("Final_Presentation", "Pk", "PCA + K-Means", "capstone project", "CLU"),
 ]
 FAMILIES = {
-    "REG": ("regression", "#7FA8FF"),
-    "CLF": ("classification", "#2F6BFF"),
-    "ENS": ("ensembles", "#FFB224"),
-    "CLU": ("clustering", "#FFD98A"),
-    "SEL": ("feature selection", "#A9B4C4"),
+    "REG": ("regression", ""),
+    "CLF": ("classification", ""),
+    "ENS": ("ensemble", ""),
+    "CLU": ("clustering", ""),
+    "SEL": ("feature selection", ""),
 }
 
 # More builds, as even row cards. (repo, title, tag, one line, stack)
 MORE = [
-    ("Where_Did_It_Go-", "Where Did It Go?", "agent", "Agent that investigates warehouse pick errors from evidence", "langgraph · groq"),
-    ("smart-agri-water-irrigation-ai", "Smart Irrigation AI", "capstone", "Crop yield prediction and irrigation advice from sensor data", "ml · dl · slm · agents"),
-    ("emergency-response-agent", "Emergency Response Agent", "multi-agent", "Coordinates responders and resources across emergencies", "google adk · python"),
-    ("quality-defect-analytics", "Quality Defect Analytics", "capstone", "Defect and supplier analytics, from EDA to forecasting", "python · sql · sklearn"),
-    ("FixIt", "FixIt", "full-stack", "Campus maintenance tickets for students, staff and admins", "rails 7 · react"),
-    ("ARtifact", "ARtifact", "web", "Heritage sites and their stories, brought into your space", "react · vite"),
-    ("Cliqtrix", "Audiva", "chatbot", "Music recommendation bot for Zoho SalesIQ", "node.js · zoho"),
-    ("Book-Material-Portal", "Study Material Portal", "web", "Students upload, browse and download study material", "javascript"),
+    ("Where_Did_It_Go-", "Where Did It Go?", "Agent", "Investigates warehouse pick errors from evidence", "LangGraph · Groq"),
+    ("smart-agri-water-irrigation-ai", "Smart Irrigation AI", "Capstone", "Crop yield prediction and irrigation advice", "ML · DL · SLMs · agents"),
+    ("emergency-response-agent", "Emergency Response Agent", "Multi-agent", "Coordinates responders and resources in emergencies", "Google ADK · Python"),
+    ("quality-defect-analytics", "Quality Defect Analytics", "Capstone", "Defect and supplier analytics, from EDA to forecasts", "Python · SQL · scikit-learn"),
+    ("FixIt", "FixIt", "Full stack", "Campus maintenance tickets for students and staff", "Rails 7 · React"),
+    ("ARtifact", "ARtifact", "Web", "Heritage sites and their stories, brought into your space", "React · Vite"),
+    ("Cliqtrix", "Audiva", "Chatbot", "Music recommendation bot for Zoho SalesIQ", "Node.js · Zoho SalesIQ"),
+    ("Book-Material-Portal", "Study Material Portal", "Web", "Students upload, browse and download study material", "JavaScript"),
 ]
 
 # Team builds: hackathons and client work, forked from the team's repo.
 SQUADS = [
-    ("orca-sih26176", "ORCA", "SIH 2026 · ISRO", "Ten cooperating agents give fishers a safe go / no-go", "agents · rag · typescript"),
-    ("APHELION-AI", "APHELION AI", "ISRO BAH", "Physics-informed solar flare forecasting", "ml · typescript"),
-    ("RoadSOSPS3", "RoadSOS", "IIT Madras CoERS", "Offline-first emergency dispatch after a road crash", "typescript · ai"),
-    ("e-commerce", "E-commerce Platform", "client", "Dockerized storefront with a Rails API and React admin", "rails · react · docker"),
+    ("orca-sih26176", "ORCA", "Team · SIH 2026", "Ten cooperating agents give fishers a safe go / no-go", "Agents · RAG · TypeScript"),
+    ("APHELION-AI", "APHELION AI", "Team · ISRO BAH", "Physics-informed solar flare forecasting", "ML · TypeScript"),
+    ("RoadSOSPS3", "RoadSOS", "Team · IIT Madras", "Offline-first emergency dispatch after a road crash", "TypeScript · AI"),
+    ("e-commerce", "E-commerce Platform", "Client", "Dockerized storefront with a Rails API and React admin", "Rails · React · Docker"),
 ]
 
 LOCKFILE = [
-    ("agents", "langgraph · langchain · google adk · tools"),
-    ("llms", "claude · gemini · groq · ollama · qlora (mlx)"),
-    ("retrieval", "chromadb · e5 · sentence-transformers"),
-    ("models", "sklearn · xgboost · pytorch · clip · videomae"),
-    ("serve", "fastapi · streamlit · docker · ci · aws"),
-    ("web", "react · next.js · ruby on rails · postgresql"),
+    ("Agents", "LangGraph, LangChain, Google ADK"),
+    ("LLMs", "Claude, Gemini, Groq, Ollama, QLoRA (MLX)"),
+    ("Retrieval", "ChromaDB, E5, sentence-transformers"),
+    ("Models", "scikit-learn, XGBoost, PyTorch, CLIP"),
+    ("Serving", "FastAPI, Streamlit, Docker, CI, AWS"),
+    ("Web", "React, Next.js, Ruby on Rails, PostgreSQL"),
 ]
