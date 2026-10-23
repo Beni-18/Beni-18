@@ -105,10 +105,10 @@ MORE = [
 
 # Team builds: hackathons and client work, forked from the team's repo.
 SQUADS = [
-    ("orca-sih26176", "ORCA", "Team · SIH 2026", "Ten cooperating agents give fishers a safe go / no-go", "Agents · RAG · TypeScript"),
-    ("APHELION-AI", "APHELION AI", "Team · ISRO BAH", "Physics-informed solar flare forecasting", "ML · TypeScript"),
-    ("RoadSOSPS3", "RoadSOS", "Team · IIT Madras", "Offline-first emergency dispatch after a road crash", "TypeScript · AI"),
-    ("e-commerce", "E-commerce Platform", "Client", "Dockerized storefront with a Rails API and React admin", "Rails · React · Docker"),
+    ("orca-sih26176", "ORCA", "SIH 2026 · ISRO", "Ten cooperating agents give fishers a safe go / no-go", "Agents · RAG · TypeScript"),
+    ("APHELION-AI", "APHELION AI", "ISRO BAH 2026", "Physics-informed solar flare forecasting", "ML · TypeScript"),
+    ("RoadSOSPS3", "RoadSOS", "IIT Madras CoERS", "Offline-first emergency dispatch after a road crash", "TypeScript · AI"),
+    ("e-commerce", "E-commerce Platform", "Client project", "Dockerized storefront with a Rails API and React admin", "Rails · React · Docker"),
 ]
 
 LOCKFILE = [

@@ -399,13 +399,15 @@ def readme():
     block = lambda *parts: '<p align="center">' + "".join(parts) + "</p>"   # no spaces: boxes sit 6px apart
     flagship = [link(f["repo"], f"card-{i + 1}.svg", f'{f["title"]}: {f["desc"]}', "50%") for i, f in enumerate(c.FLAGSHIP)]
     tiles = [link(z[0], f"zoo-{i + 1:02d}.svg", f"{z[2]} on {z[3]}", "14.28%") for i, z in enumerate(c.ZOO)]
-    other = [link(m[0], f"other-{i + 1:02d}.svg", f"{m[1]}: {m[3]}", "50%") for i, m in enumerate(c.MORE + c.SQUADS)]
+    more = [link(m[0], f"more-{i + 1:02d}.svg", f"{m[1]}: {m[3]}", "50%") for i, m in enumerate(c.MORE)]
+    team = [link(m[0], f"team-{i + 1:02d}.svg", f"{m[1]}: {m[3]}", "50%") for i, m in enumerate(c.SQUADS)]
     out = [CAT, "",
            block(pic("hero.svg", f"{c.NAME}, ML and AI engineer")), "",
            block(pic("h-about.svg", "About"), pic("about.svg", "About")), "",
            '<a id="projects"></a>', block(pic("h-projects.svg", "Featured projects")), block(*flagship), "",
            '<a id="models"></a>', block(pic("h-models.svg", "Model zoo")), block(*tiles), "",
-           block(pic("h-other.svg", "Other work")), block(*other), "",
+           block(pic("h-more.svg", "More builds")), block(*more), "",
+           block(pic("h-team.svg", "Team builds")), block(*team), "",
            block(pic("h-timeline.svg", "Timeline"), pic("timeline.svg", "Repositories created per month")), "",
            block(pic("h-stack.svg", "Stack"), pic("stack.svg", "Languages and toolkit")), "",
            block(pic("footer.svg", c.STATUS)), "",
@@ -418,17 +420,17 @@ def readme():
 # ------------------------------------------------------------------ main
 
 def render(st):
-    others = c.MORE + c.SQUADS
     files = {
         "hero.svg": hero(st),
         "h-about.svg": header("01", "About"),
         "about.svg": about(),
         "h-projects.svg": header("02", "Featured projects", f"{len(c.FLAGSHIP)} projects"),
         "h-models.svg": header("03", "Model zoo", f"{len(c.ZOO)} models, each deployed as a Streamlit app"),
-        "h-other.svg": header("04", "Other work", f"{len(others)} repos"),
-        "h-timeline.svg": header("05", "Timeline", "live from the GitHub API"),
+        "h-more.svg": header("04", "More builds", "agents, analytics and full-stack apps"),
+        "h-team.svg": header("05", "Team builds", "hackathons and client work"),
+        "h-timeline.svg": header("06", "Timeline", "live from the GitHub API"),
         "timeline.svg": timeline(st),
-        "h-stack.svg": header("06", "Stack"),
+        "h-stack.svg": header("07", "Stack"),
         "stack.svg": stack(st),
         "footer.svg": footer(),
     }
@@ -436,8 +438,10 @@ def render(st):
         files[f"card-{i + 1}.svg"] = card(f, i)
     for i, z in enumerate(c.ZOO):
         files[f"zoo-{i + 1:02d}.svg"] = zoo_tile(i + 1, *z)
-    for i, o in enumerate(others):
-        files[f"other-{i + 1:02d}.svg"] = row_card(*o, i)
+    for i, o in enumerate(c.MORE):
+        files[f"more-{i + 1:02d}.svg"] = row_card(*o, i)
+    for i, o in enumerate(c.SQUADS):
+        files[f"team-{i + 1:02d}.svg"] = row_card(*o, i)
     return files
 
 
