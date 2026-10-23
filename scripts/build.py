@@ -20,13 +20,31 @@ from pathlib import Path
 import content as c
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSETS = ROOT / "assets"
+ASSETS = Path(os.environ["OUT"]) if os.environ.get("OUT") else ROOT / "assets"
 
-# matte black, blue, and amber for numbers and highlights
-BG, PANEL, LINE, GRID = "#0A0C0F", "#0F1217", "#1C222B", "#12171E"
-TEXT, MUTED, DIM, GHOST = "#E8EDF4", "#8B95A4", "#4A5361", "#222A35"
-BLUE, BLUE2, ICE, DEEP = "#2F6BFF", "#5C8DFF", "#A8C6FF", "#14306E"
-AMBER, SAND = "#FFB224", "#FFD98A"
+# Palettes. Every colour in every image comes from the active one (content.THEME, or $THEME).
+# Roles: BG page, PANEL boxes, LINE hairlines, TEXT/MUTED/DIM type, GHOST hidden details,
+# BLUE structure, AMBER numbers and highlights, FAM model-zoo families.
+THEMES = {
+    "matte": dict(BG="#0A0C0F", PANEL="#0F1217", LINE="#1C222B", GRID="#12171E", TEXT="#E8EDF4", MUTED="#8B95A4",
+                  DIM="#4A5361", GHOST="#222A35", GHOST2="#1A2230", BLUE="#2F6BFF", BLUE2="#5C8DFF", ICE="#A8C6FF",
+                  DEEP="#14306E", MIDBLUE="#1E4FC4", AMBER="#FFB224", SAND="#FFD98A", STEEL="#A9B4C4",
+                  FAM={"REG": "#7FA8FF", "CLF": "#2F6BFF", "ENS": "#FFB224", "CLU": "#FFD98A", "SEL": "#A9B4C4"}),
+    "midnight": dict(BG="#0A1A33", PANEL="#0F2342", LINE="#22385E", GRID="#11223F", TEXT="#EEF3FB", MUTED="#9AAED0",
+                     DIM="#5A6F94", GHOST="#1E3256", GHOST2="#193052", BLUE="#4D8DFF", BLUE2="#7EAAFF", ICE="#C3D7FF",
+                     DEEP="#2C4F8C", MIDBLUE="#3A6FE0", AMBER="#FFB547", SAND="#FFDB94", STEEL="#B5C2D8",
+                     FAM={"REG": "#8DB3FF", "CLF": "#4D8DFF", "ENS": "#FFB547", "CLU": "#FFDB94", "SEL": "#B5C2D8"}),
+    "slate": dict(BG="#1B2330", PANEL="#222C3B", LINE="#313D50", GRID="#222B39", TEXT="#EEF2F7", MUTED="#A0ACBD",
+                  DIM="#66738A", GHOST="#2C3748", GHOST2="#283344", BLUE="#5B8CFF", BLUE2="#84A9FF", ICE="#C6D7FF",
+                  DEEP="#2F4A7D", MIDBLUE="#4672E0", AMBER="#FFB84D", SAND="#FFDA94", STEEL="#B3BECD",
+                  FAM={"REG": "#96B6FF", "CLF": "#5B8CFF", "ENS": "#FFB84D", "CLU": "#FFDA94", "SEL": "#B3BECD"}),
+    "paper": dict(BG="#F4F1EA", PANEL="#FFFFFF", LINE="#E1DCD0", GRID="#ECE7DC", TEXT="#141821", MUTED="#5D6573",
+                  DIM="#9AA1AD", GHOST="#E6E0D3", GHOST2="#DDD6C7", BLUE="#1E56E8", BLUE2="#3B6FF0", ICE="#4B74D9",
+                  DEEP="#BFD0F7", MIDBLUE="#3D6AE6", AMBER="#D98A00", SAND="#E8B95A", STEEL="#8E97A6",
+                  FAM={"REG": "#5A86F2", "CLF": "#1E46C8", "ENS": "#D98A00", "CLU": "#B7791F", "SEL": "#6B7383"}),
+}
+THEME = os.environ.get("THEME") or getattr(c, "THEME", "matte")
+globals().update(THEMES[THEME])
 MONO = "ui-monospace,'SF Mono',Menlo,'DejaVu Sans Mono','Courier New',monospace"
 SANS = "'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif"
 CW = 0.6   # monospace advance, in font-size units
@@ -227,8 +245,8 @@ def hero(st):
         dot = AMBER if i == 2 else ICE
         p.append(f'<rect class="bob" style="--d:{d}px;--t:{tt:.2f}s" x="{sx - 4:.1f}" y="{y0 + 64}" width="8" height="8" fill="{dot}"/>')
 
-    p.append('<defs><linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#2F6BFF" stop-opacity="0"/>'
-             '<stop offset=".85" stop-color="#2F6BFF" stop-opacity=".26"/><stop offset="1" stop-color="#A8C6FF" stop-opacity=".9"/>'
+    p.append(f'<defs><linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="{BLUE}" stop-opacity="0"/>'
+             f'<stop offset=".85" stop-color="{BLUE}" stop-opacity=".26"/><stop offset="1" stop-color="{ICE}" stop-opacity=".9"/>'
              '</linearGradient></defs>')
     p.append(f'<g class="scan"><rect x="0" y="{y0 - 30}" width="80" height="{7 * step + 56}" fill="url(#beam)"/></g>')
 
@@ -251,7 +269,7 @@ def hero(st):
     for label, val in reversed(facts):
         p.append(rise(2.6, ts(x, by + 19, [(label, DIM), (val, AMBER)], 17, anchor="end")))
         x -= (len(label) + len(val)) * 17 * CW + 40
-    p.append(pixels(W - M - 54, H - 62, SITTING, 6, [BLUE, DEEP, BLUE2, "#1E4FC4", ICE], cls="rise", start=2.8, stagger=.012))
+    p.append(pixels(W - M - 54, H - 62, SITTING, 6, [BLUE, DEEP, BLUE2, MIDBLUE, ICE], cls="rise", start=2.8, stagger=.012))
     return svg(W, H, "".join(p), "BENI-18. Bennish Christopher, ML and AI engineer, Coimbatore. =^..^=", css)
 
 
@@ -415,7 +433,7 @@ def card(f, i):
         beat = "M0 12 L40 12 L46 4 L52 20 L58 12 L96 12 L100 6 L104 12 L108 6 L112 12 L150 12 L156 2 L162 22 L168 12 L210 12"
         p.append(f'<path class="ecg" transform="translate(300,24) scale(.72)" d="{beat}" fill="none" stroke="{BLUE}" stroke-width="2"/>')
     elif f.get("deco") == "paw":
-        p.append(pixels(CWD - 52, 302, PAW, 4, [GHOST, "#1A2230"], cls="fade", start=1.0, stagger=.02))
+        p.append(pixels(CWD - 52, 302, PAW, 4, [GHOST, GHOST2], cls="fade", start=1.0, stagger=.02))
     return svg(CWD, H, "".join(p), f'{f["title"]}: {f["desc"]}', css)
 
 
@@ -436,7 +454,7 @@ def row_card(repo, title, tag, line, stack, i):
 
 def zoo_tile(num, repo, sym, algo, data, fam):
     TW, H = 170, 190
-    name, color = c.FAMILIES[fam]
+    name, color = c.FAMILIES[fam][0], FAM[fam]
     p = [f'<rect width="{TW}" height="{H}" fill="{BG}"/>',
          f'<rect x=".5" y=".5" width="{TW - 1}" height="{H - 1}" fill="{PANEL}" stroke="{LINE}"/>',
          f'<rect x="0" y="0" width="{TW}" height="4" fill="{color}"/>']
@@ -455,7 +473,8 @@ def zoo_legend():
     H = 56
     p = [f'<rect width="{W}" height="{H}" fill="{BG}"/>']
     x = M
-    for fam, (name, color) in c.FAMILIES.items():
+    for fam, (name, _) in c.FAMILIES.items():
+        color = FAM[fam]
         count = sum(z[4] == fam for z in c.ZOO)
         p.append(f'<rect x="{x}" y="20" width="14" height="14" fill="{color}"/>')
         p.append(ts(x + 22, 32, [(f"{name} ", TEXT), (str(count), AMBER)], 14, weight=400))
@@ -474,7 +493,7 @@ def toolchain(st):
     other = total - sum(v for _, v in top)
     if other / total >= .005:
         top.append(("other", other))
-    tones = [BLUE, AMBER, BLUE2, SAND, ICE, DEEP, "#A9B4C4", DIM]
+    tones = [BLUE, AMBER, BLUE2, SAND, ICE, DEEP, STEEL, DIM]
     lw = 540
     p = [f'<rect width="{W}" height="{H}" fill="{BG}"/>', panel(M, 10, lw, H - 20, "languages/", "by bytes, own repos")]
     x, bw = M + 24, lw - 48
@@ -563,7 +582,7 @@ def readme():
 
 def main():
     st = stats()
-    ASSETS.mkdir(exist_ok=True)
+    ASSETS.mkdir(parents=True, exist_ok=True)
     for old in ASSETS.glob("*.svg"):
         old.unlink()
     files = {
@@ -591,8 +610,9 @@ def main():
         files[f"squad-{i + 1:02d}.svg"] = row_card(*s, i)
     for name, body in files.items():
         (ASSETS / name).write_text(body, encoding="utf-8")
-    (ROOT / "README.md").write_text(readme(), encoding="utf-8")
-    print(f"wrote {len(files)} svgs + README.md · {st['public']} repos · {len(st['langs'])} languages")
+    if not os.environ.get("OUT"):
+        (ROOT / "README.md").write_text(readme(), encoding="utf-8")
+    print(f"[{THEME}] wrote {len(files)} svgs to {ASSETS} · {st['public']} repos · {len(st['langs'])} languages")
 
 
 if __name__ == "__main__":

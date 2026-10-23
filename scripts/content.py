@@ -3,6 +3,7 @@
 Facts here come from the repos themselves or the resume. Keep them true.
 """
 
+THEME = "paper"  # matte | midnight | slate | paper (see build.py THEMES)
 USER = "Beni-18"
 NAME = "Bennish Christopher"
 ROLE = "ml & ai engineer"
